@@ -1,7 +1,7 @@
 <template>
     <div>
       <Panel></Panel>
-      <main class="mt-20 sm:ml-64">
+      <main class="mt-30 mr-6 lg:ml-72 sm:ml-64">
         <NuxtPage></NuxtPage>
       </main>
     </div>
