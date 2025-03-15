@@ -38,9 +38,10 @@
         <div class="flex justify-end items-end">
           <button
             type="button"
+            @click.prevent="openModalRg"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
-            Agregar regitro
+            Agregar registro
           </button>
         </div>
       </div>
@@ -112,24 +113,40 @@
   
       <!-- Modal -->
       <modalDetalle :isOpen="isModalOpen" @close="closeModal" />
+
+       <!-- Modal Registri -->
+       <modalAgRegistro :isOpenRg="isModalOpenRg" @close="closeModalRg" />
     </div>
   </template>
   
   <script setup>
-  import { ref } from 'vue';
-  import modalDetalle from '@/components/modalDetalle.vue';
+import { ref } from 'vue';
+import modalDetalle from '@/components/modalDetalle.vue';
+import modalAgRegistro from '@/components/modalAgRegistro.vue';
 
-  definePageMeta({
+definePageMeta({
   layout: "admin",
 });
-  
-  const isModalOpen = ref(false);
-  
-  const openModal = () => {
-    isModalOpen.value = true;
-  };
-  
-  const closeModal = () => {
-    isModalOpen.value = false;
-  };
-  </script>
+
+//Modal Detalle
+const isModalOpen = ref(false);
+
+const openModal = () => {
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+};
+
+//Modal Agregar
+const isModalOpenRg = ref(false);
+
+const openModalRg = () => {
+  isModalOpenRg.value = true; 
+};
+
+const closeModalRg = () => {
+  isModalOpenRg.value = false; 
+};
+</script>

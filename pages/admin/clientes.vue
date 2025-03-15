@@ -28,14 +28,14 @@
               stroke-linejoin="round"
               stroke-width="2"
               d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-            /></svg
-          >Buscar
+            /></svg>Buscar
         </button>
       </form>
     </div>
     <div class="flex justify-end items-end">
       <button
-        type="button"
+        type="button" 
+        @click.prevent="openModal"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       >
         Agregar cliente
@@ -102,10 +102,43 @@
       </tbody>
     </table>
   </div>
+
+      <!-- Modal -->
+      <ModalAgCliente :isOpen="isModalOpen" @close="closeModal" />
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import ModalAgCliente from '../../components/modalAgCliente.vue'
+
 definePageMeta({
   layout: "admin",
 });
+  
+  const isModalOpen = ref(false);
+  
+  const openModal = () => {
+    isModalOpen.value = true;
+  };
+  
+  const closeModal = () => {
+    isModalOpen.value = false;
+  };
 </script>
+  
+  <style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  
+  </style>
