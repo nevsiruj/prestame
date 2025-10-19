@@ -1,9 +1,9 @@
 <template>
     <div>
-      <Login />
+      <Index />
     </div>
   </template>
   <script setup>
-  import Login from "./auth/login.vue";
+  import Index from "./auth/login.vue";
   </script>
 

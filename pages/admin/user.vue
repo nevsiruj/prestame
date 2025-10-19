@@ -6,14 +6,14 @@
           <div class="relative w-full">
             <input
               type="text"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-3 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full ps-3 p-2          "
               placeholder="Buscar"
               required
             />
           </div>
           <button
             type="submit"
-            class="inline-flex items-center py-2 px-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="inline-flex items-center py-2 px-3 ms-2 text-sm font-medium text-white bg-gray-700 rounded-lg border border-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300    "
           >
             <svg
               class="w-4 h-4 me-2"
@@ -38,7 +38,7 @@
         <button
           type="button"
           @click.prevent="openModal"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2    focus:outline-none "
         >
           Agregar usuario
         </button>
@@ -47,8 +47,8 @@
   
     <!-- Tabla -->
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50   ">
           <tr>
             <th scope="col" class="px-6 py-3">Id</th>
             <th scope="col" class="px-6 py-3">Usuario</th>
@@ -61,9 +61,9 @@
           <tr
             v-for="user in users"
             :key="user.id"
-            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200"
+            class="odd:bg-white odd: even:bg-gray-50 even: border-b  border-gray-200"
           >
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  ">
               {{ user.id }}
             </th>
             <td class="px-6 py-4">{{ user.userName }}</td>
@@ -75,7 +75,7 @@
                 class="flex font-medium text-gray-600 hover:underline"
               >
                 <svg
-                  class="w-5 h-5 text-gray-800 dark:text-white"
+                  class="w-5 h-5 text-gray-800  "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -98,7 +98,7 @@
                 class="flex font-medium text-gray-600 hover:underline ml-4"
               >
                 <svg
-                  class="w-5 h-5 text-gray-800 dark:text-white"
+                  class="w-5 h-5 text-gray-800  "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -133,8 +133,8 @@
   
   <script setup>
   import { ref, onMounted } from 'vue'
-  import userService from '~/services/userService'
-  import ModalAgUser from '../../components/modalAgUser.vue'
+  // import userService from '~/services/userService'
+  // import ModalAgUser from '../../components/modalAgUser.vue'
   
   definePageMeta({
     layout: 'admin',
@@ -184,6 +184,12 @@
       // Editar usuario
       const updatedUser = await userService.updateUser(formData.id, formData)
       console.log('Usuario actualizado:', updatedUser) // Depuración
+
+      const index = users.value.findIndex(user => user.id === formData.id)
+      if (index !== -1) {
+        users.value[index] = updatedUser // Actualiza el usuario en el array
+      }
+      
     } else {
       // Agregar usuario
       const newUser = await userService.createUser(formData)
